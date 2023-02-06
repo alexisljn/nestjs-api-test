@@ -31,5 +31,23 @@ export class ProductsService {
         return true;
     }
 
+    generateQueryFilters(queryArgs: ProductQueryArgs): ProductQueryFilters {
+        const {product_name, limit, page} = queryArgs;
+
+        const queryFilters: ProductQueryFilters = {product_name: '', limit: this.PRODUCTS_PER_PAGE, skip: 0};
+
+        if (limit) {
+            queryFilters.limit = parseInt(limit);
+        }
+
+        if (page) {
+            queryFilters.skip = (parseInt(page) - 1) * queryFilters.limit;
+        }
+
+        if (product_name) {
+            queryFilters.product_name = product_name
+        }
+
+        return queryFilters;
     }
 }
