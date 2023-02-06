@@ -10,7 +10,7 @@ database:
 	--authenticationDatabase admin
 
 down:
-	docker compose down
+	docker compose --env-file api/.env down
 
 up:
 	docker compose --env-file api/.env up
