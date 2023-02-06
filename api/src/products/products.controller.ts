@@ -1,15 +1,18 @@
 import {
     BadRequestException,
+    CacheInterceptor,
     Controller,
     Get,
     NotFoundException,
     Param,
-    Query
+    Query,
+    UseInterceptors
 } from "@nestjs/common";
 import {ProductsService} from "./products.service";
 import {ProductQueryArgs} from "./types/products.types";
 
 @Controller('products')
+@UseInterceptors(CacheInterceptor)
 export class ProductsController {
     constructor(private readonly productsService: ProductsService) {}
 
