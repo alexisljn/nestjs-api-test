@@ -9,6 +9,12 @@ export class ProductsService {
     PRODUCTS_PER_PAGE = 20;
     constructor(@InjectModel(Product.name) private productModel: Model<ProductDocument>) {}
 
+    async findAll(filters: ProductQueryFilters): Promise<Product[]> {
+        const {product_name, limit, skip} = filters;
+
+        return this.productModel.find({product_name: new RegExp(product_name)}).limit(limit).skip(skip).exec();
+    }
+
     async findByCode(code: string): Promise<Product | null> {
         return this.productModel.findOne({code}).exec();
     }
