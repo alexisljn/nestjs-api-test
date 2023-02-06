@@ -11,10 +11,11 @@ import {
 import {ProductsService} from "./products.service";
 import {ProductQueryArgs} from "./types/products.types";
 import {ApiParam, ApiQuery, ApiResponse, ApiTags} from "@nestjs/swagger";
+import {ProductsLoggingInterceptor} from "./logging/products.logging.interceptor";
 
 @ApiTags('products')
 @Controller('products')
-@UseInterceptors(CacheInterceptor)
+@UseInterceptors(CacheInterceptor, ProductsLoggingInterceptor)
 export class ProductsController {
     constructor(private readonly productsService: ProductsService) {}
 
